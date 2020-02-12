@@ -27,7 +27,7 @@ import java.util.Map;
  * @Date: 2020/2/12 9:18
  **/
 
-@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+// @WebServlet(urlPatterns = "/*", loadOnStartup = 0)
 public class DispatchServlet extends HttpServlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
