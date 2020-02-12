@@ -47,7 +47,7 @@ public class ClassLoaderHelper {
         return cls;
     }
 
-    public static Set<Class<?>> getClass(String packageName) {
+    public static Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<>();
         try {
             Enumeration<URL> urls = getClassLoader().getResources(packageName.replaceAll(".", "/"));
