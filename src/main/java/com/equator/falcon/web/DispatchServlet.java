@@ -65,6 +65,7 @@ public class DispatchServlet extends HttpServlet {
             RequestParam requestParam = new RequestParam(paramMap);
             Method actionMethod = handler.getActionMethod();
             Object result = ReflectionHelper.invokeMethod(controllerInstance, actionMethod, requestParam);
+            // 对于那些带有Action注解且返回值类型是JsonData的方法
             if (result instanceof JsonData) {
                 JsonData jsonData = (JsonData) result;
                 Object data = jsonData.getModel();
@@ -77,8 +78,7 @@ public class DispatchServlet extends HttpServlet {
                     writer.close();
                 }
             }
-            // 处理其它数据类型，如JSP
-
+            // TODO 处理其它数据类型，如JSP
         }
     }
 }
