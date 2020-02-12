@@ -2,10 +2,8 @@ package com.equator.falcon.ioc;
 
 import com.equator.falcon.annotation.DI;
 import com.equator.falcon.util.ArrayUtil;
-import com.equator.falcon.util.BeanContainer;
 import com.equator.falcon.util.MapUtil;
 import com.equator.falcon.util.ReflectionHelper;
-import org.apache.commons.collections.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Map;

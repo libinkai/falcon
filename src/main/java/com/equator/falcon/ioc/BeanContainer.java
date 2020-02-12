@@ -1,4 +1,6 @@
-package com.equator.falcon.util;
+package com.equator.falcon.ioc;
+
+import com.equator.falcon.util.ReflectionHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,5 +31,9 @@ public class BeanContainer {
             throw new RuntimeException("Failed to getBean");
         }
         return (T) beanMap.get(cls);
+    }
+
+    public static void setBean(Class<?> cls, Object obj) {
+        beanMap.put(cls, obj);
     }
 }

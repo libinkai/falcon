@@ -2,9 +2,8 @@ package com.equator.falcon.web;
 
 import com.equator.falcon.annotation.Action;
 import com.equator.falcon.util.ArrayUtil;
-import com.equator.falcon.util.ClassContainer;
+import com.equator.falcon.ioc.ClassContainer;
 import com.equator.falcon.util.CollectionUtil;
-import com.equator.falcon.util.MapUtil;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

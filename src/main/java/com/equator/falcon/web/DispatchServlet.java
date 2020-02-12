@@ -1,6 +1,7 @@
 package com.equator.falcon.web;
 
 import com.equator.falcon.configuration.ConfigurationFactory;
+import com.equator.falcon.ioc.BeanContainer;
 import com.equator.falcon.util.*;
 import org.apache.commons.lang3.StringUtils;
 

@@ -26,6 +26,7 @@
         <logback-classic.version>1.2.3</logback-classic.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-collections.version>3.2.1</commons-collections.version>
+        <cglib.version>3.2.12</cglib.version>
     </properties>
 
     <dependencies>
@@ -38,6 +39,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
