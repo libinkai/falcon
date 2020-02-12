@@ -20,10 +20,10 @@ public class IocHelper {
         Map<Class<?>, Object> beanMap = BeanContainer.getBeanMap();
         if (MapUtil.isNotEmpty(beanMap)) {
             for (Map.Entry<Class<?>, Object> beanEntry : beanMap.entrySet()) {
-                // 获取 bean 类 与 实例
+                // 获取 web 类 与 实例
                 Class<?> beanClass = beanEntry.getKey();
                 Object beanInstance = beanEntry.getValue();
-                // 获取 bean 的成员变量
+                // 获取 web 的成员变量
                 Field[] fields = beanClass.getDeclaredFields();
                 if (ArrayUtil.isNotEmpty(fields)) {
                     for (Field field : fields) {

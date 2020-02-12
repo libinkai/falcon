@@ -14,6 +14,10 @@ public final class ConfigurationFactory {
         return configuration.getProperty(ConfigurationConstant.BASE_URL);
     }
 
+    public static String getResourcesUrl() {
+        return configuration.getProperty(ConfigurationConstant.RESOURCES_URL);
+    }
+
     public static String getJdbcClassName() {
         return configuration.getProperty(ConfigurationConstant.JDBC_DRIVER_CLASS_NAME);
     }

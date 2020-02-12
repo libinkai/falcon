@@ -10,6 +10,7 @@ package com.equator.falcon.configuration;
 public interface ConfigurationConstant {
     String CONFIG_FILE = "falcon.properties";
     String BASE_URL = "falcon.framework.base-url";
+    String RESOURCES_URL = "falcon.framework.resources-url";
     String JDBC_DRIVER_CLASS_NAME = "falcon.jdbc.driver-class-name";
     String JDBC_URL = "falcon.jdbc.url";
     String JDBC_USER = "falcon.jdbc.username";
