@@ -4,7 +4,7 @@ import com.equator.falcon.aop.AopHelper;
 import com.equator.falcon.ioc.IocHelper;
 import com.equator.falcon.ioc.BeanContainer;
 import com.equator.falcon.ioc.ClassContainer;
-import com.equator.falcon.util.ClassLoaderHelper;
+import com.equator.falcon.ioc.ClassLoaderHelper;
 
 /**
  * 框架启动入口

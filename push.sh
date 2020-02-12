@@ -1,3 +1,7 @@
+mvn clean
+
+mvn install
+
 git add .
 
 git commit -m "$1"

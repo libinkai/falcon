@@ -1,6 +1,8 @@
-package com.equator.falcon.util;
+package com.equator.falcon.ioc;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -21,6 +23,8 @@ import java.util.jar.JarFile;
  **/
 
 public class ClassLoaderHelper {
+    private static Logger logger = LoggerFactory.getLogger(ClassLoaderHelper.class);
+
     /**
      * 获取类加载器
      *
@@ -42,7 +46,8 @@ public class ClassLoaderHelper {
         try {
             cls = Class.forName(className, isInit, getClassLoader());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error("failed to loadClass {}", className);
+            // e.printStackTrace();
         }
         return cls;
     }
@@ -57,8 +62,10 @@ public class ClassLoaderHelper {
                     String protocol = url.getProtocol();
                     if ("file".equals(protocol)) {
                         String packagePath = url.getPath().replaceAll("%20", " ");
+                        logger.debug("packagePath : {}", packagePath);
                         appendClass(classSet, packageName, packagePath);
                     } else if ("jar".equals(protocol)) {
+                        logger.debug("load jar ...");
                         JarURLConnection connection = (JarURLConnection) url.openConnection();
                         if (connection != null) {
                             JarFile jarFile = connection.getJarFile();
@@ -107,15 +114,18 @@ public class ClassLoaderHelper {
                 }
                 appendClass(classSet, className);
             } else {
+                logger.debug("load dir : {}", fileName);
                 String subPackagePath = fileName;
                 if (StringUtils.isNotEmpty(packagePath)) {
-                    subPackagePath = StringUtils.join(packagePath, "/", subPackagePath);
+                    subPackagePath = StringUtils.join(packagePath, subPackagePath);
                 }
                 String subPackageName = fileName;
                 if (StringUtils.isNotEmpty(packageName)) {
-                    subPackageName = StringUtils.join(packageName, ".", subPackageName);
+                    if (!"".equals(packageName)) {
+                        subPackageName = StringUtils.join(packageName, ".", subPackageName);
+                    }
                 }
-                appendClass(classSet, packageName, packagePath);
+                appendClass(classSet, subPackageName, subPackagePath);
             }
         }
     }
@@ -127,6 +137,7 @@ public class ClassLoaderHelper {
      * @param className
      */
     public static void appendClass(Set<Class<?>> classSet, String className) {
+        logger.debug("load class : {}", className);
         Class<?> cls = loadClass(className, false);
         classSet.add(cls);
     }
