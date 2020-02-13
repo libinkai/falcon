@@ -9,5 +9,3 @@
 - ioc IOC特性实现
 - util 工具类
 - web MVC特性实现
-
-### demo 依赖falcon的web示例应用

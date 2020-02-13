@@ -3,6 +3,8 @@ package com.equator.falcon.ioc;
 import com.equator.falcon.annotation.Controller;
 import com.equator.falcon.annotation.Service;
 import com.equator.falcon.configuration.ConfigurationFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -14,6 +16,8 @@ import java.util.Set;
  **/
 
 public final class ClassContainer {
+    private static Logger logger = LoggerFactory.getLogger(ClassContainer.class);
+
     private static Set<Class<?>> classSet = null;
 
     static {

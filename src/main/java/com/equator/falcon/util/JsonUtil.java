@@ -12,6 +12,9 @@ public class JsonUtil {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static <T> String toJson(T obj) {
+        if (obj == null) {
+            return "";
+        }
         String jsonString = null;
         try {
             jsonString = objectMapper.writeValueAsString(obj);

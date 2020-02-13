@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: protobuf-java-3.6.1.jar commons-collections-3.2.1.jar comm
+ ons-lang3-3.9.jar jackson-annotations-2.10.0.jar javax.servlet-api-3.
+ 1.0.jar jackson-core-2.10.0.jar slf4j-api-1.7.25.jar cglib-3.2.12.jar
+  asm-7.1.jar jackson-databind-2.10.0.jar logback-classic-1.2.3.jar my
+ sql-connector-java-8.0.13.jar logback-core-1.2.3.jar
+Main-Class: 
+

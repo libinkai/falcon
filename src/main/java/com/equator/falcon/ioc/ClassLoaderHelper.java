@@ -1,5 +1,6 @@
 package com.equator.falcon.ioc;
 
+import com.equator.falcon.util.ArrayUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,8 @@ public class ClassLoaderHelper {
     public static Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<>();
         try {
-            Enumeration<URL> urls = getClassLoader().getResources(packageName.replaceAll(".", "/"));
+            // 注意是\\. 而不是.
+            Enumeration<URL> urls = getClassLoader().getResources(packageName.replaceAll("\\.", "/"));
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
                 if (url != null) {
@@ -105,27 +107,29 @@ public class ClassLoaderHelper {
                 return file.isFile() && file.getName().endsWith(".class") || file.isDirectory();
             }
         });
-        for (File file : files) {
-            String fileName = file.getName();
-            if (file.isFile()) {
-                String className = fileName.substring(0, fileName.lastIndexOf("."));
-                if (StringUtils.isNotEmpty(packageName)) {
-                    className = StringUtils.join(packageName, ".", className);
-                }
-                appendClass(classSet, className);
-            } else {
-                logger.debug("load dir : {}", fileName);
-                String subPackagePath = fileName;
-                if (StringUtils.isNotEmpty(packagePath)) {
-                    subPackagePath = StringUtils.join(packagePath, subPackagePath);
-                }
-                String subPackageName = fileName;
-                if (StringUtils.isNotEmpty(packageName)) {
-                    if (!"".equals(packageName)) {
-                        subPackageName = StringUtils.join(packageName, ".", subPackageName);
+        if (ArrayUtil.isNotEmpty(files)) {
+            for (File file : files) {
+                String fileName = file.getName();
+                if (file.isFile()) {
+                    String className = fileName.substring(0, fileName.lastIndexOf("."));
+                    if (StringUtils.isNotEmpty(packageName)) {
+                        className = StringUtils.join(packageName, ".", className);
                     }
+                    appendClass(classSet, className);
+                } else {
+                    logger.debug("load dir : {}", fileName);
+                    String subPackagePath = fileName;
+                    if (StringUtils.isNotEmpty(packagePath)) {
+                        subPackagePath = StringUtils.join(packagePath, subPackagePath);
+                    }
+                    String subPackageName = fileName;
+                    if (StringUtils.isNotEmpty(packageName)) {
+                        if (!"".equals(packageName)) {
+                            subPackageName = StringUtils.join(packageName, ".", subPackageName);
+                        }
+                    }
+                    appendClass(classSet, subPackageName, subPackagePath);
                 }
-                appendClass(classSet, subPackageName, subPackagePath);
             }
         }
     }

@@ -1,10 +1,10 @@
 package com.equator.falcon.web;
 
 import com.equator.falcon.aop.AopHelper;
-import com.equator.falcon.ioc.IocHelper;
 import com.equator.falcon.ioc.BeanContainer;
 import com.equator.falcon.ioc.ClassContainer;
 import com.equator.falcon.ioc.ClassLoaderHelper;
+import com.equator.falcon.ioc.IocHelper;
 
 /**
  * 框架启动入口

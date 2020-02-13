@@ -1,6 +1,5 @@
 package com.equator.falcon.web;
 
-import java.util.Enumeration;
 import java.util.Map;
 
 /**

@@ -1,5 +1,8 @@
 package com.equator.falcon.web;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @Author: Equator
  * @Date: 2020/2/12 8:43
@@ -21,5 +24,15 @@ public class Request {
 
     public String getRequestPath() {
         return requestPath;
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 }
