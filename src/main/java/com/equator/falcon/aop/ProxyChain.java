@@ -6,8 +6,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * 代理链
- * TODO 搞明白这里
+ * 代理链 代理链是必须的，因为同一个类可能被多个代理类代理，不是链式代理，会被覆盖
  *
  * @Author: Equator
  * @Date: 2020/2/12 11:38

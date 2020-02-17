@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  **/
 
 public class DynamicProxy implements MethodInterceptor {
+    // 目标对象
     Object target;
 
     public DynamicProxy(Object target) {
@@ -19,17 +20,23 @@ public class DynamicProxy implements MethodInterceptor {
     }
 
     @Override
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+    public Object intercept(Object targetObject, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         before();
         // Object result = methodProxy.invoke(o, objects);
         // Object result = method.invoke(o, objects);
-        Object result = methodProxy.invokeSuper(o, objects);
+        Object result = methodProxy.invokeSuper(targetObject, objects);
         after();
         return result;
     }
 
+    /**
+     * 创建代理类
+     * @param <T>
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public <T> T getProxy() {
+        // 目标类 代理类（实现了MethodInterceptor接口，即间接继承了Callable接口）
         return (T) Enhancer.create(target.getClass(), this);
     }
 

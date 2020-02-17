@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * 负责创建代理对象，输入一个目标类和一组Proxy接口实现，输出一个代理类
+ * 负责创建代理对象，输入一个目标类和一组Proxy接口实现，输出一个代理类 （CGLIB）
  *
  * @Author: Equator
  * @Date: 2020/2/12 11:54
@@ -20,6 +20,7 @@ public class ProxyFacroty {
         return (T) Enhancer.create(targetClass, new MethodInterceptor() {
             @Override
             public Object intercept(Object targetObject, Method targetMethod, Object[] methodParams, MethodProxy methodProxy) throws Throwable {
+                // doProxyChain不能漏掉
                 return new ProxyChain(targetClass,targetObject,targetMethod,methodProxy,methodParams,proxyList).doProxyChain();
             }
         });
