@@ -19,13 +19,15 @@ public class AopHelper {
 
     static {
         try {
+            // 代理类 -> 被代理类集合
             Map<Class<?>, Set<Class<?>>> proxyMap = createProxyMap();
+            // 被代理类 -> 代理类列表（链式调用）
             Map<Class<?>, List<Proxy>> targetMap = createTargetMap(proxyMap);
             logger.debug("加载 aopHelper, proxyMap size :{}, targetMap size :{}", proxyMap.size(), targetMap.size());
             for (Map.Entry<Class<?>, List<Proxy>> targetEntry : targetMap.entrySet()) {
                 Class<?> targetClass = targetEntry.getKey();
                 List<Proxy> proxyList = targetEntry.getValue();
-                // 获取代理对象并保存
+                // 获取代理对象并保存（将原来的实例替换为代理类实例了）
                 Object proxy = ProxyFacroty.createProxy(targetClass, proxyList);
                 BeanContainer.setBean(targetClass, proxy);
                 logger.debug("add aop {} ...", targetClass.getName());
@@ -61,8 +63,11 @@ public class AopHelper {
         Map<Class<?>, Set<Class<?>>> proxySetMap = new HashMap<>();
         Set<Class<?>> proxyClassSet = ClassContainer.getClassSetBySuper(AspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
+            // 使用AOP时，定义的切面需要有Aspect注解以及继承AspectProxy，选择性得实现AspectProxy得模板方法
+            // 如果是按照正常的使用流程来说，AspectProxy的子类都会有Aspect注解，这里看作是双重检查吧
             if (proxyClass.isAnnotationPresent(Aspect.class)) {
                 Aspect aspect = proxyClass.getAnnotation(Aspect.class);
+                // 这里面的AOP是代理了被某个注解标记了的所有类（如Service注解下的UserService类，OrderService类，都会被代理）
                 Set<Class<?>> targetClassSet = createTargetClassSet(aspect);
                 proxySetMap.put(proxyClass, targetClassSet);
             }
